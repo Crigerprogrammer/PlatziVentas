@@ -33,6 +33,16 @@ def delete_client(client_name):
 		print('Cliente no registrado')
 
 
+def search_client(client_name):
+	clients_list = clients.split(',')
+
+	for client in clients_list:
+		if client != client_name:
+			continue
+		else:
+			return True
+
+
 def _add_comma():
 	global clients
 	clients += ','
@@ -44,6 +54,7 @@ def _print_welcome():
 	print('[C] Crear Cliente')
 	print('[A] Actualizar Cliente')
 	print('[E] Eliminar Cliente')
+	print('[B] Buscar Cliente')
 
 
 def _get_client_name():
@@ -70,5 +81,13 @@ if __name__ == '__main__':
 		updated_client_name = input('Cual es el nombre del cliente Actualizado')
 		update_client(client_name, updated_client_name)
 		list_clients()
+	elif command == 'B':
+		client_name = _get_client_name()
+		found = search_client(client_name)
+
+		if found:
+			print('Cliente Existe')
+		else:
+			print('El Cliente {} no existe'.format(client_name))
 	else:
 		print('Comando Invalido')
